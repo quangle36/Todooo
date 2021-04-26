@@ -7,6 +7,7 @@ const Todo = mongoose.model('Todo', TodoSchema);
 export class TodoController {
 
     public addNewTodo(req: Request, res: Response) {
+        res.header("Access-Control-Allow-Origin", "http://localhost:3000");
         let newTodo = new Todo(req.body);
         console.log(req.body);
         newTodo.save((err, todo) => {
@@ -18,6 +19,7 @@ export class TodoController {
     }
 
     public getTodos(req: Request, res: Response) {
+        res.header("Access-Control-Allow-Origin", "http://localhost:3000");
         Todo.find({}, (err, todo) => {
             if (err) {
                 res.send(err);

@@ -1,16 +1,15 @@
 import React from "react";
-import AddTask from "./AddTask";
 import Task from "./Task";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Toggle from "./Toggle";
 
-function Tasks() {
+function Tasks({newTask}) {
     const [tasks, setTasks] = useState([]);
     
     useEffect(() => {
         axios
-            .get("/todo")
+            .get("http://localhost:7000/todo")
             .then((response) => {
                 console.log(response.data);
                 setTasks(response.data);

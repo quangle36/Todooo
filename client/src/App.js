@@ -9,6 +9,29 @@ import Tasks from "./components/Tasks";
 import Vip from "./components/Vip";
 
 function App() {
+ 
+  const [newTask, setNewTask] = useState({})
+  //Add Task
+  const addTask = async (task) => {
+ 
+    // const res = await fetch('http://localhost:7000/todo', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-type': 'application/json',
+    //   },
+    //   body: JSON.stringify(task),
+    const res = await fetch('http://localhost:7000/todo', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(task),
+    })
+    
+    console.log(res.json())
+    const data = await res.json()
+    setNewTask(data)
+  }
   return (
     <div
       className="flex justify-center items-center h-screen font-sans 
@@ -16,8 +39,8 @@ function App() {
     >
       <Routes>
         <Route path="/" element={<Main />}>
-          <Route path="/" element={<Tasks />} />
-          <Route path="/create" element={<AddTask />} />
+          <Route path="/" element={<Tasks newTask={newTask} />} />
+          <Route path="/create" element={<AddTask onAdd={addTask} />} />
         </Route>
       </Routes>
     </div>

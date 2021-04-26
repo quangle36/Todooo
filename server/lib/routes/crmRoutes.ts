@@ -1,12 +1,12 @@
 import {Request, Response, NextFunction} from "express";
 import { TodoController } from "../controllers/crmController";
-
+var cors = require('cors')
 export class Routes { 
     
     public todoController: TodoController = new TodoController() 
     
     public routes(app): void {   
-        
+        // app.use(cors())
         app.route('/')
         .get((req: Request, res: Response) => {            
             res.status(200).send({
